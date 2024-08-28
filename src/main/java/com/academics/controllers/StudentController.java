@@ -1,13 +1,21 @@
 package com.academics.controllers;
 
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.academics.dao.adminDao;
+import com.academics.dto.AdmissionDto;
+import com.academics.dto.FeesClassesDto;
 
 
-@RestController
+
+@Controller
 public class StudentController {
 	
 	@RequestMapping("/form")
@@ -26,9 +34,17 @@ public class StudentController {
 	public String photoUpload() {
 		return "photoUpload";
 	}
+	
 	@RequestMapping("/admissionForm")
-	public String admissionForm() {
+	public String admissionForm(Model model, AdmissionDto dto ) {
+		List<FeesClassesDto> classesList = adminDao.listClasses();
+		List<String> listCategory = adminDao.listCategory();
+		List<String> session = adminDao.listSession();
 		
+		model.addAttribute("session", session);
+		model.addAttribute("classesList", classesList);
+		model.addAttribute("listCategory", listCategory);
+		model.addAttribute("admissionDto", dto);
 		return "admissionForm";
 	}	
 	
@@ -134,7 +150,8 @@ public class StudentController {
 	@RequestMapping(value="/saveAdmissison",method=RequestMethod.POST)
 	public String saveAdmissison()  {
 	
-		return "redirect:/studentsList";
+//		return "redirect:/studentsList";
+		return "addSession";  //for testing purpose i added this line remove it 
 		
 	}
 	

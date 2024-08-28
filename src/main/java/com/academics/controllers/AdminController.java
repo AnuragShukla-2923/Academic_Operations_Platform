@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 //@RestController
 @Controller
 public class AdminController {
@@ -14,6 +15,7 @@ public class AdminController {
 	public String classes() {
 
 		return "addClasses";
+
 	}
 
 	@RequestMapping("/addClasses")
@@ -47,6 +49,7 @@ public class AdminController {
 	public String addCategory(@RequestParam("category") String category) {
 		System.out.println(category + "----");
 		return "redirect:/academic/category";
+
 	}
 
 	@RequestMapping("/feestype")
